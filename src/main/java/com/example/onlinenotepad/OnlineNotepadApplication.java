@@ -1,6 +1,8 @@
 package com.example.onlinenotepad;
 
+import com.example.onlinenotepad.model.Note;
 import com.example.onlinenotepad.model.User;
+import com.example.onlinenotepad.service.NoteService;
 import com.example.onlinenotepad.service.UserService;
 import com.example.onlinenotepad.service.UserServiceImpl;
 import org.springframework.boot.CommandLineRunner;
@@ -18,20 +20,18 @@ public class OnlineNotepadApplication {
     }
 
     @Bean
-    public CommandLineRunner demo(UserService userService) {
+    public CommandLineRunner demo(UserService userService, NoteService noteService) {
         return (args) -> {
-
-            User user = new User();
-            user.setfName("dato");
-            user.setlName("saldadze");
-            user.setId(1L);
-            user.setEmail("d@gmail.com");
-            userService.addUser(user);
 
             List<User> userList = userService.getUserList();
             for (User person : userList) {
                 System.out.println(person);
             }
+            List<Note> noteList = noteService.getNotesByUserId(1L);
+            for (Note note : noteList) {
+                System.out.println(note);
+            }
+
         };
     }
 }

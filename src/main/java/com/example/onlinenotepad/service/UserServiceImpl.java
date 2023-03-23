@@ -1,5 +1,6 @@
 package com.example.onlinenotepad.service;
 
+import com.example.onlinenotepad.model.Note;
 import com.example.onlinenotepad.model.User;
 import com.example.onlinenotepad.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUser(Long id) {
+      return  userRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public void deleteUser(Long id) {
 
     }
+
 
 }
